@@ -1,0 +1,18 @@
+Tela de contato -> verificações de tamanho (esperar BCD)
+
+Telas de login / cadastro -> verificações de tamanho (esperar BCD)
+
+Telas com formulário -> cor do select
+
+Tela de cadastro de pet -> arrumar os valores dos selects; não permitir datas futuras; não permitir pesos abaixo de 0; ícone de outros
+
+Telas de cadastro -> responsividade do campo de DDD + telefone; select com todas as UF do Brasil + ambiente seguro
+
+Tela de serviços -> responsividade dos cards
+
+Telas de cadastro -> ViaCEP API
+
+Banco de dados -> campos com tamanho errado; campos de telefone faltando; campo de raça faltando
+
+Tela de escolha do pet -> form quebrando os links (?)
+
