@@ -1,9 +1,9 @@
 <?php
 
-$usuario = 'root';
-$senha = '';
-$database = 'bd_petshop';
-$host = 'localhost';
+$usuario = 'uvgvpnyvpp';
+$senha = 'A5DX35D083H2E08T$';
+$database = 'appbcd-leonardo-database';
+$host = 'appbcd-leonardo-server.mysql.database.azure.com';
 
 $mysqli = new mysqli($host, $usuario, $senha, $database);
 
