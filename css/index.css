@@ -102,7 +102,25 @@
     }
 }
 
-#botaosobre:hover, #botaoblog:hover{
+#botaosobre:hover, #botaoblog:hover, #botaomapa:hover{
     background-color: #0D51AA!important;
     color: #fff!important;
+}
+
+@media(max-width: 1199px){
+    #colab{
+        height: 270px!important;
+    }
+}
+
+@media(max-width: 991px){
+    #colab{
+        height: 250px!important;
+    }
+}
+
+@media(max-width: 767px){
+    #colab{
+        height: 100%!important;
+    }
 }

@@ -12,11 +12,11 @@
     border: none;
 }
 
-#home, #agendamento, #produtos, #contato{
+#home, #pservicos, #produtos, #contato{
     color: #fff;
 }
 
-#home:hover, #agendamento:hover, #produtos:hover, #contato:hover{
+#home:hover, #pservicos:hover, #produtos:hover, #contato:hover{
     color: #0D51AA;
 }
 
@@ -31,7 +31,7 @@
 }
 
 @media (max-width: 991px){
-    #login, #home, #agendamento, #produtos, #contato{
+    #login, #home, #pservicos, #produtos, #contato{
         background-color: #518CD7!important;
         color: #fff!important;
         padding-left: 0px!important;
@@ -75,4 +75,21 @@
     #blog{
         text-align: center!important;
     }
+}
+
+#pservicos{
+    margin-left: 5vh;
+    font-weight: bold; 
+    font-size: 18px; 
+    height: 38px; 
+    border-color: #a9a9a9; 
+    border-radius: 4px; 
+    background-color: #518CD7 !important; 
+    border: none !important;
+    color: #fff;
+    cursor: pointer;
+}
+
+#pservicos:hover{
+    color: #0D51AA;
 }

@@ -31,7 +31,7 @@
 }
 
 @media (max-width: 991px){
-    #login, #home, #agendamento, #produtos, #contato{
+    #login, #home, #agendamento, #produtos, #contato, #user{
         background-color: #518CD7!important;
         color: #fff!important;
         padding-left: 0px!important;
