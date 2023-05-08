@@ -4,7 +4,7 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
-if(!isset($_SESSION['adm'])) {
+if(!isset($_SESSION['fun'])) {
     die("<!DOCTYPE html>
     <html lang='pt-br'>
     <head>
@@ -25,10 +25,9 @@ if(!isset($_SESSION['adm'])) {
         <img src='img/denied.png' alt='cachorro policial proibindo acesso' style='max-width: 600px'>
     </div>
     <div class='row mt-3 text-center justify-content-center'>
-        <a href='index.php' style='text-decoration: none; position: absolute;'><span><img src='img/home.png' alt='imagem de login' style='width: 50px;'><h6 style='color: #fff'>Retornar à home</h6></span></a>
+        <a href='index.php' style='text-decoration: none; position: absolute;'><span><img src='img/index.png' alt='imagem de login' style='width: 50px;'><h6 style='color: #fff'>Retornar à home</h6></span></a>
     </div>
 </div></body></html>");
 }
 
 ?>
-

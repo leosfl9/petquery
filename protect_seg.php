@@ -1,10 +1,10 @@
 <?php
 
 if(!isset($_SESSION)) {
-    session_start();
+    session_start();   
 }
 
-if(!isset($_SESSION['adm'])) {
+if((!isset($_SESSION['adm'])) and (!isset($_SESSION['fun'])) ) {
     die("<!DOCTYPE html>
     <html lang='pt-br'>
     <head>
@@ -31,4 +31,3 @@ if(!isset($_SESSION['adm'])) {
 }
 
 ?>
-

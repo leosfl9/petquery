@@ -1,13 +1,14 @@
 <?php
 
-include('protect.php');
+include('protect_func.php');
 require('conexao.php');
 
 $id=$_SESSION['id'];
 
 
-$consult_nome = "SELECT nome from adm inner join login_adm on fk_login = id_login
-WHERE id_adm = '$id'";
+$consult_nome = "SELECT nome from funcionario inner join login_funcionario on fk_fun_log = id_login_funcionario
+WHERE id_funcionario = '$id'";
+
 $result_nome = mysqli_query($mysqli,$consult_nome);
 $nome = mysqli_fetch_assoc($result_nome);
 
@@ -24,8 +25,8 @@ $data_agend = date('Y-m-d');
     <link rel="stylesheet" href="css/paineis.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="icon" href="img/icons/logo.png" type="Image/png">
-    <script src="js/painel.js"></script>
-    <title>PetQuery - Painel ADM</title>
+    <script src="js/painel_fun.js"></script>
+    <title>PetQuery - Painel de funcionário</title>
 </head>
 <body style="background-color: #fff">
             
@@ -35,7 +36,6 @@ $data_agend = date('Y-m-d');
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php"><img src="img/icons/logo.png" style="width: 15vh; height: 15vh; margin-bottom: -25px; margin-top: -25px;" alt="logo da petquery"></a>
             <a class="navbar-brand" href="logout.php"><img src="img/logout.png" style="width: 45px" alt="icone de logout"></a>
-    
         </div>
     </nav>
 
@@ -49,15 +49,7 @@ $data_agend = date('Y-m-d');
     <div class="container">
         <div class="row mt-5">
             <div class="col-md">
-                <a href="cadastro_func.php"><button class="mb-4" id="cadfunc" style="color: #0D51AA; background-color: #fff; border: 1px solid #518CD7; font-weight: 600; border-radius: 25px; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; padding-right: 15px; width: 190px">Cadastrar funcionário</button></a>
-            </div>
-
-            <div class="col-md">
                 <a href="cadastro_cli.php"><button class="mb-4" id="cadus" style="color: #0D51AA; background-color: #fff; border: 1px solid #518CD7; font-weight: 600; border-radius: 25px; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; padding-right: 15px; width: 190px">Cadastrar usuários</button></a>
-            </div>
-
-            <div class="col-md">
-                <button onclick="func()" class="mb-4" id="listfunc" style="color: #0D51AA; background-color: #fff; border: 1px solid #518CD7; font-weight: 600; border-radius: 25px; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; padding-right: 15px; width: 190px">Listar funcionários</button>
             </div>
 
             <div class="col-md">
@@ -75,146 +67,6 @@ $data_agend = date('Y-m-d');
     </div>
 </div>
 
-<!-- lista de funcionários -->
-
-<div class="container-fluid mt-5 mb-5" id="list_func" style="display: none">
-    <div class="container">
-        <div class="row text-center">
-            <?php
-                $query_item = "SELECT COUNT(id_funcionario) AS qnt_func FROM funcionario";
-                $result_item = mysqli_query($mysqli, $query_item);
-                $row_item = mysqli_fetch_assoc($result_item);
-
-                echo "<div class='mb-5'>";
-                    echo "<h6 style='font-weight: 600'>Quantidade de funcionários registrados: " . $row_item['qnt_func'] . "</h6>";
-                echo "</div>";
-            ?>
-            
-            <div class="search-wrapper mb-5 text-center">
-                <input type="search" onkeyup="searchfunc()" placeholder="Pesquise algo..." style="width: 50%; border-radius: 15px; border: 1px solid #a9a9a9; padding: 5px; padding-left: 10px" id="searchfunc">
-            </div>
-        </div>
-        <div class="row justify-content-center">
-
-        <?php
-
-            $sql = "SELECT id_funcionario, sobrenome, nome, cpf, ddd, telefone, email, data_nascimento, profissao, logadouro, numero, complemento, bairro, uf, cidade, cep, id_endereco_funcionario, id_login_funcionario FROM funcionario INNER JOIN endereco_funcionario ON endereco_funcionario.fk_fun_end = funcionario.id_funcionario INNER JOIN login_funcionario ON login_funcionario.fk_fun_log = funcionario.id_funcionario ORDER BY id_funcionario ASC";
-            
-            $result = $mysqli->query($sql);
-
-            while ($row = mysqli_fetch_assoc($result)){
-                echo "<div class='col-lg-3'>";
-                    echo "<div class='card func' style='border-radius: 20px; margin: 0 auto'>";
-                        echo "<div class='card-body'>";
-                            echo "<h5 class='card-title mb-4 nome-func'>".$row['nome'] . " " . $row['sobrenome']."</h5>";
-                            echo "<p class='card-text' style='font-weight: 600'>ID: <span style='font-weight: 300' class='card-text'>".$row['id_funcionario']."</span></p>";
-                            echo "<p class='card-text' style='font-weight: 600'>Profissão: <span style='font-weight: 300' class='card-text'>".$row['profissao']."</span></p>";
-                            echo "<p class='card-text' style='font-weight: 600'>CPF: <span style='font-weight: 300' class='card-text'>".$row['cpf']."</span></p>";
-                            echo "<p class='card-text' style='font-weight: 600'>E-mail: <span style='font-weight: 300' class='card-text'>".$row['email']."</span></p>";
-                            echo "<p class='card-text' style='font-weight: 600'>Telefone: <span style='font-weight: 300' class='card-text'> (".$row['ddd'].")". " " . $row['telefone']."</span></p>";
-                            echo "<p class='card-text' style='font-weight: 600'>Endereço: <span style='font-weight: 300' class='card-text'> ".$row['cep']. " - " .$row['logadouro']. ", " . $row['numero']. " - " . $row['bairro'] . ", " . $row['cidade'] . " - " . $row['uf'] . ", " . $row['complemento'] ."</span></p>";
-                            echo "<p class='card-text' style='font-weight: 600'>Nascimento: <span style='font-weight: 300' class='card-text'>".$row['data_nascimento']."</span></p>";
-                            echo "<a href='#' data-bs-toggle='modal' data-bs-target='#editfun".$row['id_funcionario']."' class='btn btn-success mb-2 mt-3'>Editar</a><a href='#' data-bs-toggle='modal' data-bs-target='#apagafun".$row['id_funcionario']."' class='btn btn-danger ms-3 mb-2 mt-3'>Demitir</a>";
-                        echo "</div>";
-                    echo "</div>";
-                echo "</div>";
-
-                echo "<div class='modal fade' id='editfun".$row['id_funcionario']."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
-                echo "<div class='modal-dialog'>";
-                echo    "<div class='modal-content'>";
-                echo    "<div class='modal-header'>";
-                echo        "<h5 class='modal-title' id='exampleModalLabel'>Edição de funcionário</h5>";
-                echo        "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
-                echo    "</div>";
-                echo    "<div class='modal-body'>";
-                echo        "<form method='POST' action='proc_edit_func.php'>";
-
-                echo        "<input type='hidden' name='id_fun' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['id_funcionario']. "'>";
-                
-                echo        "<input type='hidden' name='id_end_fun' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['id_endereco_funcionario']. "'>";
-
-                echo        "<label for='nome' class='mb-1' style='font-weight: 600;'>Nome</label><br>";
-                echo        "<input type='text' name='nome' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['nome']. "' required>";
-                
-                echo        "<label for='sobrenome' class='mb-1' style='font-weight: 600;'>Sobrenome</label><br>";
-                echo        "<input type='text' name='sobrenome' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['sobrenome']. "' required>";
-                
-                echo        "<label for='profissao' class='mb-1' style='font-weight: 600;'>Profissão</label><br>";
-                echo        "<input type='text' name='profissao' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['profissao']. "' required>";
-
-                echo        "<label for='cpf' class='mb-1' style='font-weight: 600;'>CPF</label><br>";
-                echo        "<input type='text' name='cpf' minlength='11' maxlength='11' pattern='[0-9]{11}' class='form-control mb-3' value='".$row['cpf']. "' required>";
-
-                echo        "<label for='email' class='mb-1' style='font-weight: 600;'>E-mail</label><br>";
-                echo        "<input type='mail' name='email' minlength='1' maxlength='250' class='form-control mb-3' value='".$row['email']. "' required>";
-
-                echo        "<label for='ddd' class='mb-1' style='font-weight: 600;'>DDD</label><br>";
-                echo        "<input type='number' name='ddd' min='11' max='99' class='form-control mb-3' value='".$row['ddd']. "' required>";
-
-                echo        "<label for='telefone' class='mb-1' style='font-weight: 600;'>Telefone</label><br>";
-                echo        "<input type='text' name='telefone' minlength='8' maxlength='9' pattern='[0-9]{8-9}' class='form-control mb-3' value='".$row['telefone']. "' required>";
-
-                echo        "<label for='cep' class='mb-1' style='font-weight: 600;'>CEP</label><br>";
-                echo        "<input type='text' minlength='8' maxlength='8' pattern='[0-9]{8}' name='cep' class='form-control mb-3' value='".$row['cep']. "' required>";
-
-                echo        "<label for='logradouro' class='mb-1' style='font-weight: 600;'>Logradouro</label><br>";
-                echo        "<input type='text' name='logradouro' minlength='1' maxlength='250' class='form-control mb-3' value='".$row['logadouro']. "' required>";
-
-                echo        "<label for='numero' class='mb-1' style='font-weight: 600;'>Número</label><br>";
-                echo        "<input type='number' name='numero' minlength='1' maxlength='6' class='form-control mb-3' value='".$row['numero']. "' required>";
-
-                echo        "<label for='bairro' class='mb-1' style='font-weight: 600;'>Bairro</label><br>";
-                echo        "<input type='text' name='bairro' minlength='1' maxlength='250' class='form-control mb-3' value='".$row['bairro']. "' required>";
-
-                echo        "<label for='cidade' class='mb-1' style='font-weight: 600;'>Cidade</label><br>";
-                echo        "<input type='text' name='cidade' minlength='1' maxlength='250' class='form-control mb-3' value='".$row['cidade']. "' required>";
-
-                echo        "<label for='uf' class='mb-1' style='font-weight: 600;'>UF</label><br>";
-                echo        "<input type='text' name='uf' pattern='[A-Za-z]{2}' class='form-control mb-3' value='".$row['uf']. "' required>";
-
-                echo        "<label for='complemento' class='mb-1' style='font-weight: 600;'>Complemento</label><br>";
-                echo        "<input type='text' name='complemento' minlength='1' maxlength='50' class='form-control mb-3' value='".$row['complemento']. "' required>";
-
-                echo    "</div>";
-                echo    "<div class='modal-footer'>";
-                echo        "<button type='button' class='btn btn-danger' data-bs-dismiss='modal'>Cancelar</button>";
-                echo        "<button type='submit' class='btn btn-success'>Salvar alterações</button>";
-                echo    "</div>";
-                echo    "</div>";
-                echo    "</form>";
-                echo "</div>";
-                echo "</div>";
-
-                echo "<div class='modal fade' id='apagafun".$row['id_funcionario']."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
-                echo "<div class='modal-dialog'>";
-                echo    "<div class='modal-content'>";
-                echo    "<div class='modal-header'>";
-                echo        "<h5 class='modal-title' id='exampleModalLabel'>Demissão de funcionário</h5>";
-                echo        "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>";
-                echo    "</div>";
-                echo    "<div class='modal-body'>";
-                echo    "<form method='POST' action='proc_apaga_func.php'>";
-                echo        "<input type='hidden' name='id_func' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['id_funcionario']. "'>";
-                echo        "<input type='hidden' name='id_end_func' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['id_endereco_funcionario']. "'>";
-                echo        "<input type='hidden' name='id_login_func' minlength='1' maxlength='100' class='form-control mb-3' value='".$row['id_login_funcionario']. "'>";
-                echo    "<h5>Você tem certeza de que deseja demitir esse funcionário?</h5>";
-                echo    "</div>";
-                echo    "<div class='modal-footer'>";
-                echo        "<button type='button' class='btn btn-success' data-bs-dismiss='modal'>Cancelar</button>";
-                echo        "<button type='submit' class='btn btn-danger'>Confirmar demissão</button>";
-                echo    "</div>";
-                echo    "</div>";
-                echo    "</form>";
-                echo "</div>";
-                echo "</div>";
-            }
-        ?>
-        </div>
-        <div class="row mt-5 text-center">
-            <p id="noresultfunc"></p>
-        </div>
-    </div>
-</div>
 
 <!-- lista de clientes -->
 
@@ -570,6 +422,7 @@ $data_agend = date('Y-m-d');
         </div>
     </div>
 </div>
+
 
 </body>
 </html>

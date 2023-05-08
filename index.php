@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="icon" href="img/icons/logo.png" type="Image/png">
     <title>PetQuery, o melhor serviço de agendamento on-line para seu pet!</title>
@@ -13,7 +13,7 @@
 <body>
 
     <!-- navbar -->
-
+    <?php session_start(); ?>
     <nav id="nav" class="navbar navbar-expand-lg sticky-top" style="background-color: #518CD7;">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.php"><img src="img/icons/logo.png" style="width: 15vh; height: 15vh; margin-bottom: -25px; margin-top: -25px;" alt="logo da petquery"></a>
@@ -23,10 +23,18 @@
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item"><a class="nav-link active" id="home" aria-current="page" href="index.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Home</a></li>
-              <li class="nav-item"><a class="nav-link" id="agendamento" href="agendamento.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Agendamento</a></li>
+              <li class="nav-item"><a class="nav-link" id="agendamento" href="<?php if(isset($_SESSION['servico'])){echo $_SESSION['servico'];}else{echo'login.php';}?>" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Serviços</a></li>
               <li class="nav-item"><a class="nav-link" id="produtos" href="blog.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Blog</a></li>
               <li class="nav-item"><a class="nav-link" id="contato" href="contato.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Contato</a></li>
-              <li class="nav-item"><a class="nav-link" id="login" href="login.php" style="border-radius: 5px; padding-left: 15px; padding-right: 15px; margin-left: 5vh; font-weight: bold; font-size: 18px">Entre ou cadastre-se</a></li>
+              <?php 
+              if(isset($_SESSION['menu'])){
+                echo $_SESSION['menu'];
+                // unset($_SESSION['menu']);
+              }else{ 
+                $menu = "<li class='nav-item'><a class='nav-link' id='login' href='login.php' style='border-radius: 5px; padding-left: 15px; padding-right: 15px; margin-left: 5vh; font-weight: bold; font-size: 18px'>Entre ou cadastre-se</a></li>";
+                echo $menu;
+              }
+              ?>
             </ul>
           </div>
         </div>
@@ -62,27 +70,27 @@
         <h3 class="mb-5" id="servicos" style="text-align: left; font-weight: 900;">Nossos serviços</h3>
         <div class="row justify-content-center" style="text-align: center">
           <div class="col-md-2 mb-5">
-            <a href="agendamento.php"><img class="mb-2" src="img/icons/icons_serviçosPet/banho e tosa.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
+            <a href="<?php if(isset($_SESSION['banho'])){echo $_SESSION['banho'];}else{echo'login.php';}?>"><img class="mb-2" src="img/icons/icons_serviçosPet/banho e tosa.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
             <span style="font-weight: 600;">Banho e tosa</span>
           </div>
           <div class="col-md-2 mb-5">
-            <a href="agendamento.php"><img class="mb-2" src="img/icons/icons_serviçosPet/veterinario.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
+            <a href="<?php if(isset($_SESSION['vet'])){echo $_SESSION['vet'];}else{echo'login.php';}?>"><img class="mb-2" src="img/icons/icons_serviçosPet/veterinario.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
             <span style="font-weight: 600">Veterinário</span>
           </div>
           <div class="col-md-2 mb-5">
-            <a href="agendamento.php"><img class="mb-2" src="img/icons/icons_serviçosPet/passeio pet.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>"><img class="mb-2" src="img/icons/icons_serviçosPet/passeio pet.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
             <span style="font-weight: 600">Passeio Pet</span>
           </div>
           <div class="col-md-2 mb-5">
-            <a href="agendamento.php"><img class="mb-2" src="img/icons/icons_serviçosPet/hospedagem pet.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>"><img class="mb-2" src="img/icons/icons_serviçosPet/hospedagem pet.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
             <span style="font-weight: 600">Hospedagem Pet</span>
           </div>
           <div class="col-md-2 mb-5">
-            <a href="agendamento.php"><img class="mb-2" src="img/icons/icons_serviçosPet/creche pet.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>"><img class="mb-2" src="img/icons/icons_serviçosPet/creche pet.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
             <span style="font-weight: 600">Creche Pet</span>
           </div>
           <div class="col-md-2 mb-5">
-            <a href="agendamento.php"><img class="mb-2" src="img/icons/icons_serviçosPet/adestramento.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>"><img class="mb-2" src="img/icons/icons_serviçosPet/adestramento.png" alt="" style="width: 90px; border-radius: 50%"></a><br>
             <span style="font-weight: 600">Adestramento</span>
           </div>
         </div>
@@ -109,7 +117,7 @@
                   <button disabled="disabled" style="background-color: #f7f7f7; color: #0D51AA; font-weight: 600; border: none; padding: 15px; font-size: 18px"><img src="img/icone_tecnologia.png" alt="ícone de tecnologia" style="width: 40px; margin-right: 10px"><span>Tecnologias de ponta</span></button>
                 </div>
             </div>
-          <a href="sobre.php"><button id="botaosobre" style="background-color: #fff; color: #518CD7; font-weight: 600; border: none; border-radius: 10px; padding: 10px; font-size: 18px">Conheça a PetQuery</button></a>
+          <a href="sobre.php"><button id="botaosobre" style="background-color: #fff; color: #0D51AA; font-weight: 600; border: none; border-radius: 10px; padding: 10px; font-size: 18px">Conheça a PetQuery</button></a>
         </div>
       </div>
 
@@ -177,7 +185,7 @@
 
       <!-- nossas unidades -->
       
-      <div class="container-fluid p-5" id="mapa" style="background-color: #A7C8F2">
+      <div class="container-fluid p-5 mb-5" id="mapa" style="background-color: #A7C8F2">
         <div class="row">
           <h3 class="mb-5 mt-2" style="text-align: center; font-weight: 900; color: #fff">Nossas unidades</h3>
         </div>
@@ -224,6 +232,61 @@
         </div>
       </div>
 
+      <!-- colaboradores -->
+
+        <div class="container">
+          <div class="row">
+            <h3 class="mb-5 mt-2" style="font-weight: 900; color: #000">Colaboradores</h3>
+          </div>
+          <div class="row justify-content-center">
+  
+            <div class="col-md mb-5">
+              <div class="card" id="colab" style="margin: 0 auto; height: 300px">
+                <img src="img/404.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: 600">Leonardo da Silva Flores</h5>
+                  <a href="https://www.linkedin.com/in/leonardo-da-silva-flores-617429252/" style="text-decoration: none">LinkedIn</a><br>
+                  <a href="https://github.com/leosfl9" style="text-decoration: none">GitHub</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-md mb-5">
+              <div class="card" id="colab" style="margin: 0 auto; height: 300px">
+                <img src="img/404.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: 600">Matheus Henrique Cardoso</h5>
+                  <a href="https://www.linkedin.com/in/matheus-henrique-cardoso-nascimento-empresa-b47677252" style="text-decoration: none">LinkedIn</a><br>
+                  <a href="https://github.com/MatheusHenrique29" style="text-decoration: none">GitHub</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-md mb-5">
+              <div class="card" id="colab" style="margin: 0 auto; height: 300px">
+                <img src="img/404.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: 600">Noemi Sarid Azócar</h5>
+                  <a href="https://www.linkedin.com/in/noemi-sarid-azocar-ramirez-152007202" style="text-decoration: none">LinkedIn</a><br>
+                  <a href="https://github.com/nazocar" style="text-decoration: none">GitHub</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-md mb-5">
+              <div class="card" id="colab" style="margin: 0 auto; height: 300px">
+                <img src="img/404.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight: 600">Ribamar Julio Nunes</h5>
+                  <a href="https://www.linkedin.com/in/ribamar-j-b634b320a" style="text-decoration: none">LinkedIn</a><br>
+                  <a href="https://github.com/RibamarJulio" style="text-decoration: none">GitHub</a>
+                </div>
+              </div>
+            </div>  
+  
+          </div>
+        </div>
+
       <!-- footer -->
 
       <nav class="container-fluid p-5" style="background-color: #F7F7F7;">
@@ -236,25 +299,25 @@
           </div>
           <div class="col-sm-3 mb-5" style="text-align: center;">
             <h5 style="font-weight: bold">Serviços</h5>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Banho e Tosa</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Veterinário</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Passeio Pet</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Hospedagem Pet</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Creche Pet</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Adestramento</span></a><br>
+            <a href="<?php if(isset($_SESSION['banho'])){echo $_SESSION['banho'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Banho e Tosa</span></a><br>
+            <a href="<?php if(isset($_SESSION['vet'])){echo $_SESSION['vet'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Veterinário</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Passeio Pet</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Hospedagem Pet</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Creche Pet</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Adestramento</span></a><br>
           </div>
           <div class="col-sm-3 mb-5" style="text-align: center;">
             <h5 style="font-weight: bold">Cliente</h5>
             <a href="login.php" style="text-decoration: none; color: #000"><span style="font-size: 14px">Fazer login</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Cadastrar-se</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Agendamentos</span></a><br>
+            <a href="cadastro_cli.php" style="text-decoration: none; color: #000"><span style="font-size: 14px">Cadastrar-se</span></a><br>
+            <a href="<?php if(isset($_SESSION['agend'])){echo $_SESSION['agend'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Agendamentos</span></a><br>
           </div>
           <div class="col-sm-3" style="text-align: center;">
             <h5 style="font-weight: bold">Redes sociais</h5>
-            <a href=""><img class="mb-2" src="img/facebook.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
-            <a href=""><img class="mb-2" src="img/twitter.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
-            <a href=""><img class="mb-2" src="img/instagram.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
-            <a href=""><img class="mb-2" src="img/youtube.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://www.facebook.com/profile.php?id=100092203154650"><img class="mb-2" src="img/facebook.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://twitter.com/PetQuery"><img class="mb-2" src="img/twitter.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://www.instagram.com/petquery/"><img class="mb-2" src="img/instagram.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://www.youtube.com/channel/UCZplcMZlorhJ3N2uyuRnoxw"><img class="mb-2" src="img/youtube.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
           </div>
         </div>
       </nav>

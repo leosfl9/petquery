@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/contato.css">
+    <link rel="stylesheet" href="css/msg.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="icon" href="img/icons/logo.png" type="Image/png">
     <title>Entre em contato com a equipe PetQuery!</title>
 </head>
-<body style="background-color: #D4E1F2">
+<body style="background-color: #EDEDED">
 
     <!-- navbar -->
-
+<?php session_start(); ?>
     <nav id="nav" class="navbar navbar-expand-lg sticky-top" style="background-color: #518CD7;">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.php"><img src="img/icons/logo.png" style="width: 15vh; height: 15vh; margin-bottom: -25px; margin-top: -25px;" alt="logo da petquery"></a>
@@ -23,10 +23,18 @@
           <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item"><a class="nav-link" id="home" aria-current="page" href="index.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Home</a></li>
-              <li class="nav-item"><a class="nav-link" id="agendamento" href="agendamento.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Agendamento</a></li>
+              <li class="nav-item"><a class="nav-link" id="agendamento" href="<?php if(isset($_SESSION['servico'])){echo $_SESSION['servico'];}else{echo'login.php';}?>" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Serviços</a></li>
               <li class="nav-item"><a class="nav-link" id="produtos" href="blog.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Blog</a></li>
               <li class="nav-item"><a class="nav-link active" id="contato" href="contato.php" style="margin-left: 5vh; font-weight: bold; font-size: 18px">Contato</a></li>
-              <li class="nav-item"><a class="nav-link" id="login" href="login.php" style="border-radius: 5px; padding-left: 15px; padding-right: 15px; margin-left: 5vh; font-weight: bold; font-size: 18px">Entre ou cadastre-se</a></li>
+              <?php 
+              if(isset($_SESSION['menu'])){
+                echo $_SESSION['menu'];
+                // unset($_SESSION['menu']);
+              }else{ 
+                $menu = "<li class='nav-item'><a class='nav-link' id='login' href='login.php' style='border-radius: 5px; padding-left: 15px; padding-right: 15px; margin-left: 5vh; font-weight: bold; font-size: 18px'>Entre ou cadastre-se</a></li>";
+                echo $menu;
+              }
+              ?>
             </ul>
           </div>
         </div>
@@ -53,105 +61,11 @@
                             <div class="mb-3">
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-lg-2 mb-3">
+                                        <div class="col-lg-3 mb-3">
                                             <label for="ddd" class="form-label" style="font-weight: 600; font-size: 20px">DDD</label><br>
-                                            <select name="choice" id="choice" style="height: 38px; border-color: #a9a9a9; border-radius: 4px" required>
-                                                <option hidden disabled selected>DDD</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                                <option value="24">24</option>
-                                                <option value="25">25</option>
-                                                <option value="26">26</option>
-                                                <option value="27">27</option>
-                                                <option value="28">28</option>
-                                                <option value="29">29</option>
-                                                <option value="31">31</option>
-                                                <option value="32">32</option>
-                                                <option value="33">33</option>
-                                                <option value="34">34</option>
-                                                <option value="35">35</option>
-                                                <option value="36">36</option>
-                                                <option value="37">37</option>
-                                                <option value="38">38</option>
-                                                <option value="39">39</option>
-                                                <option value="28">28</option>
-                                                <option value="29">29</option>
-                                                <option value="30">30</option>
-                                                <option value="31">31</option>
-                                                <option value="32">32</option>
-                                                <option value="33">33</option>
-                                                <option value="34">34</option>
-                                                <option value="35">35</option>
-                                                <option value="36">36</option>
-                                                <option value="37">37</option>
-                                                <option value="38">38</option>
-                                                <option value="39">39</option>
-                                                <option value="41">41</option>
-                                                <option value="42">42</option>
-                                                <option value="43">43</option>
-                                                <option value="44">44</option>
-                                                <option value="45">45</option>
-                                                <option value="46">46</option>
-                                                <option value="47">47</option>
-                                                <option value="48">48</option>
-                                                <option value="49">49</option>
-                                                <option value="51">51</option>
-                                                <option value="52">52</option>
-                                                <option value="53">53</option>
-                                                <option value="54">54</option>
-                                                <option value="55">55</option>
-                                                <option value="56">56</option>
-                                                <option value="57">57</option>
-                                                <option value="58">58</option>
-                                                <option value="59">59</option>
-                                                <option value="61">61</option>
-                                                <option value="62">62</option>
-                                                <option value="63">63</option>
-                                                <option value="64">64</option>
-                                                <option value="65">65</option>
-                                                <option value="66">66</option>
-                                                <option value="67">67</option>
-                                                <option value="68">69</option>
-                                                <option value="71">71</option>
-                                                <option value="72">72</option>
-                                                <option value="73">73</option>
-                                                <option value="74">74</option>
-                                                <option value="75">75</option>
-                                                <option value="76">76</option>
-                                                <option value="77">77</option>
-                                                <option value="78">78</option>
-                                                <option value="79">79</option>
-                                                <option value="81">81</option>
-                                                <option value="82">82</option>
-                                                <option value="83">83</option>
-                                                <option value="84">84</option>
-                                                <option value="85">85</option>
-                                                <option value="86">86</option>
-                                                <option value="87">87</option>
-                                                <option value="88">88</option>
-                                                <option value="89">89</option>
-                                                <option value="91">91</option>
-                                                <option value="92">92</option>
-                                                <option value="93">93</option>
-                                                <option value="94">94</option>
-                                                <option value="95">95</option>
-                                                <option value="96">96</option>
-                                                <option value="97">97</option>
-                                                <option value="98">98</option>
-                                                <option value="99">99</option>
-                                            </select>
+                                            <input class="form-control" type="number" name="ddd" id="ddd" placeholder="DDD" min="11" max="99" style="border-color: #a9a9a9; border-radius: 4px" required>
                                         </div>
-                                        <div class="col-lg-10 mb-3">
+                                        <div class="col-lg-9 mb-3">
                                             <label for="telefone" class="form-label" style="font-weight: 600; font-size: 20px">Telefone</label><br>
                                             <input type="text" minlength="8" maxlength="9" placeholder="Telefone" class="form-control" id="telefone" style="border-color: #a9a9a9" required>
                                         </div>
@@ -167,7 +81,7 @@
                             </div>
                             
                             <div class="container text-center mt-5">
-                                <button type="submit" class="btn" style="background-color: #A7C8F2; border: 1px solid #3a86ff; border-radius: 20px; color: #3a86ff;font-weight: 600">Enviar</button>
+                                <button type="submit" id="enviarmsg" class="btn" style="background-color: #A7C8F2; border: 1px solid #3a86ff; border-radius: 20px; color: #3a86ff;font-weight: 600">Enviar</button>
                             </div>
                         </form>
                     </div>
@@ -213,25 +127,25 @@
           </div>
           <div class="col-sm-3 mb-5" style="text-align: center;">
             <h5 style="font-weight: bold">Serviços</h5>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Banho e Tosa</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Veterinário</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Passeio Pet</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Hospedagem Pet</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Creche Pet</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Adestramento</span></a><br>
+            <a href="<?php if(isset($_SESSION['banho'])){echo $_SESSION['banho'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Banho e Tosa</span></a><br>
+            <a href="<?php if(isset($_SESSION['vet'])){echo $_SESSION['vet'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Veterinário</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Passeio Pet</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Hospedagem Pet</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Creche Pet</span></a><br>
+            <a href="<?php if(isset($_SESSION['aumigos'])){echo $_SESSION['aumigos'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Adestramento</span></a><br>
           </div>
           <div class="col-sm-3 mb-5" style="text-align: center;">
             <h5 style="font-weight: bold">Cliente</h5>
             <a href="login.php" style="text-decoration: none; color: #000"><span style="font-size: 14px">Fazer login</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Cadastrar-se</span></a><br>
-            <a href="" style="text-decoration: none; color: #000"><span style="font-size: 14px">Agendamentos</span></a><br>
+            <a href="cadastro_cli.php" style="text-decoration: none; color: #000"><span style="font-size: 14px">Cadastrar-se</span></a><br>
+            <a href="<?php if(isset($_SESSION['agend'])){echo $_SESSION['agend'];}else{echo'login.php';}?>" style="text-decoration: none; color: #000"><span style="font-size: 14px">Agendamentos</span></a><br>
           </div>
           <div class="col-sm-3" style="text-align: center;">
             <h5 style="font-weight: bold">Redes sociais</h5>
-            <a href=""><img class="mb-2" src="img/facebook.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
-            <a href=""><img class="mb-2" src="img/twitter.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
-            <a href=""><img class="mb-2" src="img/instagram.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
-            <a href=""><img class="mb-2" src="img/youtube.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://www.facebook.com/profile.php?id=100092203154650"><img class="mb-2" src="img/facebook.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://twitter.com/PetQuery"><img class="mb-2" src="img/twitter.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://www.instagram.com/petquery/"><img class="mb-2" src="img/instagram.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
+            <a href="https://www.youtube.com/channel/UCZplcMZlorhJ3N2uyuRnoxw"><img class="mb-2" src="img/youtube.png" alt="" style="width: 30px; border-radius: 50%"></a><br>
           </div>
         </div>
       </nav>

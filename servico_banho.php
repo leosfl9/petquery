@@ -1,3 +1,18 @@
+<?php 
+require ('conexao.php');
+session_start();
+$rest = filter_input(INPUT_POST,'nome',FILTER_SANITIZE_STRING);
+
+$query = "SELECT id_pet,raca FROM PET WHERE nome_pet = '$rest'";
+$query_run = mysqli_query($mysqli,$query);
+$id_fk = mysqli_fetch_assoc($query_run);
+
+$id_pet = $id_fk['id_pet'];
+$raca = $id_fk['raca'];
+$_SESSION['id'] = $id_pet;
+$_SESSION['nome'] = $rest;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -33,8 +48,8 @@
                         </div>
                         <div class="col-sm-9 p-4">
                         <div class="card-body">
-                            <h5 class="card-text" style="font-weight: 600; color: #0D51AA">Nome do pet</h3>
-                            <h6 class="card-text" style="font-weight: 600; color: #518CD7">Raça do pet</h4>
+                            <h5 class="card-text" style="font-weight: 600; color: #0D51AA"><?php echo $rest ;?></h3>
+                            <h6 class="card-text" style="font-weight: 600; color: #518CD7"><?php echo $raca ;?></h4>
                         </div>
                         </div>
                     </div>
@@ -42,7 +57,7 @@
 
         <!-- seleção de serviço -->
 
-        <form action="">
+        <form action="confirma_agendamento_banho.php" id="form_banho" method="POST">
 
             <h6 style="font-weight: 600;" class="mb-4">Selecione o serviço</h6>
             
@@ -55,7 +70,7 @@
                             </div>
                         <div class="card-body text-center">
                             <label for="banho" class="mb-3" style="font-weight: 600;">Banho</label><br>
-                            <input type="radio" id="banho" name="serv_banho" value="banho" required><br>
+                            <input type="radio" id="banho" name="serv_banho" value="Banho" required><br>
                         </div>
                         </div>
                 </div>
@@ -67,7 +82,7 @@
                             </div>
                         <div class="card-body text-center">
                             <label for="banhohidrat" class="mb-3" style="font-weight: 600;">Banho & Hidratação</label><br>
-                            <input type="radio" id="banhohidrat" name="serv_banho" value="banho e hidratação" required><br>
+                            <input type="radio" id="banhohidrat" name="serv_banho" value="Banho e hidratação" required><br>
                         </div>
                         </div>
                 </div>
@@ -79,7 +94,7 @@
                             </div>
                         <div class="card-body text-center">
                             <label for="banhotosahig" class="mb-3" style="font-weight: 600;">Banho & Tosa higiênica</label><br>
-                            <input type="radio" id="banhotosahig" name="serv_banho" value="banho e tosa higiênica" required><br>
+                            <input type="radio" id="banhotosahig" name="serv_banho" value="Banho e tosa higiênica" required><br>
                         </div>
                         </div>
                 </div>
@@ -91,7 +106,7 @@
                             </div>
                         <div class="card-body text-center">
                             <label for="banhotosamaq" class="mb-3" style="font-weight: 600;">Banho & Tosa máquina</label><br>
-                            <input type="radio" id="banhotosamaq" name="serv_banho" value="banho e tosa máquina" required><br>
+                            <input type="radio" id="banhotosamaq" name="serv_banho" value="Banho e tosa máquina" required><br>
                         </div>
                         </div>
                 </div>
@@ -103,7 +118,7 @@
                             </div>
                         <div class="card-body text-center">
                             <label for="banhotosates" class="mb-3" style="font-weight: 600;">Banho & Tosa tesoura</label><br>
-                            <input type="radio" id="banhotosates" name="serv_banho" value="banho e tosa tesoura" required><br>
+                            <input type="radio" id="banhotosates" name="serv_banho" value="Banho e tosa tesoura" required><br>
                         </div>
                         </div>
                     </div>  
@@ -111,16 +126,17 @@
 
             <!-- botões -->
 
-            <div class="row mt-5">
-                <div class="col text-end">
-                    <a href="" class=""><button class="p-2" style="border: 1px solid #518CD7; background-color: #fff; border-radius: 5px; color: #0D51AA; width: 100px; font-weight: 600"><img class="me-2" src="img/icons/seta-esquerda.png">Voltar</img></button></a>
-                </div>
-                <div class="col">
-                    <button type="submit" class="p-2" style="border: 1px solid #518CD7; background-color: #fff; border-radius: 5px; color: #0D51AA; width: 100px; font-weight: 600">Avançar<img class="ms-2" src="img/icons/seta-direita (2).png"></img></button>
-                </div>
-            </div>
-
+            
         </form>
+        
+        <div class="row mt-5 mb-5">
+            <div class="col text-end">
+                <a href="escolha_pet_banho.php"><button class="p-2" style="border: 1px solid #518CD7; background-color: #fff; border-radius: 5px; color: #0D51AA; width: 100px; font-weight: 600"><img class="me-2" src="img/icons/seta-esquerda.png">Voltar</img></button></a>
+            </div>
+            <div class="col">
+                <button type="submit" form="form_banho" class="p-2" style="border: 1px solid #518CD7; background-color: #fff; border-radius: 5px; color: #0D51AA; width: 100px; font-weight: 600">Avançar<img class="ms-2" src="img/icons/seta-direita (2).png"></img></button>
+            </div>
+        </div>
 
     </div>
 
